@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nkosi, T'Kari — Personal Record</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+  :root{
+    --void: #08050e;
+    --panel: #120d1e;
+    --panel-2: #17112a;
+    --purple: #7c3aed;
+    --purple-bright: #a78bfa;
+    --purple-deep: #3b1e73;
+    --lilac: #c9b8f5;
+    --bone: #ece6f7;
+    --dim: #94879f;
+    --line: rgba(196,181,253,0.14);
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+  body{
+    background: var(--void);
+    color: var(--bone);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+  }
+
+  .topbar{
+    display:flex; justify-content:space-between; align-items:center;
+    padding: 16px 40px;
+    border-bottom: 1px solid var(--line);
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    color: var(--dim);
+    text-transform: uppercase;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .topbar .dot{ width:7px; height:7px; border-radius:50%; background: var(--purple-bright); display:inline-block; margin-right:7px; box-shadow: 0 0 8px var(--purple-bright); }
+  .topbar b{ color: var(--lilac); font-weight:600; }
+
+  .wrap{ max-width: 1200px; margin: 0 auto; padding: 60px 40px 90px; }
+
+  .hero{
+    display:grid; grid-template-columns: 1fr 260px;
+    gap: 40px; align-items:center;
+    margin-bottom: 50px;
+  }
+  @media (max-width: 860px){ .hero{ grid-template-columns:1fr; } }
+
+  .kicker{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: #e0855f;
+    margin-bottom: 18px;
+  }
+
+  h1{
+    font-family:'Playfair Display', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(48px, 7vw, 82px);
+    line-height: 0.95;
+    color: var(--bone);
+    margin-bottom: 6px;
+  }
+  .subname{
+    font-family:'Playfair Display', serif;
+    font-size: 22px; letter-spacing: 3px;
+    color: var(--purple-bright);
+    text-transform: uppercase;
+    margin-bottom: 22px;
+  }
+
+  .quote{
+    border-left: 2px solid var(--purple);
+    padding-left: 18px;
+    font-family:'Playfair Display', serif;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--lilac);
+    max-width: 620px;
+  }
+
+  /* emblem */
+  .emblem{ position:relative; width: 220px; height:220px; margin: 0 auto; }
+  .emblem svg{ width:100%; height:100%; }
+  .emblem .word{
+    position:absolute; font-family:'JetBrains Mono', monospace;
+    font-size:9px; letter-spacing:2px; color: var(--dim); text-transform:uppercase;
+    width:100%; text-align:center;
+  }
+  .emblem .word.top{ top: 14%; }
+  .emblem .word.bottom{ bottom: 14%; }
+
+  .divider{ height:1px; background: var(--line); margin: 40px 0; }
+
+  /* stat strip */
+  .stats{
+    display:grid; grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    margin-bottom: 46px;
+  }
+  @media (max-width: 860px){ .stats{ grid-template-columns: repeat(2,1fr);} }
+  .stat{ background: var(--panel); padding: 20px 22px; }
+  .stat .k{ font-family:'JetBrains Mono', monospace; font-size: 10px; letter-spacing:2px; text-transform:uppercase; color: var(--dim); margin-bottom: 12px; }
+  .stat .track{ height: 4px; background: rgba(255,255,255,0.06); position:relative; margin-bottom:8px; }
+  .stat .track i{ position:absolute; inset:0; width:0%; background: linear-gradient(90deg, var(--purple-deep), var(--purple-bright)); transition: width 1.3s cubic-bezier(.2,.8,.2,1); }
+  .stat .n{ font-family:'JetBrains Mono', monospace; font-size: 12px; color: var(--purple-bright); text-align:right; }
+
+  /* tabs */
+  .tabs{ display:flex; gap: 6px; flex-wrap: wrap; margin-bottom: 0; }
+  .tab{
+    font-family:'JetBrains Mono', monospace;
+    font-size: 11px; letter-spacing: 1.5px; text-transform:uppercase;
+    color: var(--dim);
+    background: var(--panel);
+    border: 1px solid var(--line);
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all .2s ease;
+  }
+  .tab:hover{ color: var(--lilac); }
+  .tab.active{ background: var(--purple-bright); color: #1a0f2e; border-color: var(--purple-bright); font-weight:600; }
+
+  .panel{
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-top: none;
+    padding: 40px 44px 46px;
+    min-height: 340px;
+  }
+  @media (max-width: 640px){ .panel{ padding: 30px 22px; } }
+
+  .panel-top{
+    display:flex; justify-content:space-between; align-items:baseline;
+    margin-bottom: 22px;
+    flex-wrap: wrap; gap: 8px;
+  }
+  .entry-tag{ font-family:'JetBrains Mono', monospace; font-size: 11px; letter-spacing:2px; color: #e0855f; text-transform:uppercase; }
+  .kept-by{ font-family:'JetBrains Mono', monospace; font-size: 10px; letter-spacing:2px; color: var(--dim); text-transform:uppercase; opacity:.7; }
+
+  .panel h2{
+    font-family:'Playfair Display', serif;
+    font-style: italic;
+    font-size: 30px;
+    color: var(--bone);
+    margin-bottom: 20px;
+  }
+
+  .panel p{
+    font-size: 16px; line-height: 1.85; color: var(--bone); margin-bottom: 18px;
+    max-width: 760px;
+  }
+  .panel p:last-child{ margin-bottom:0; }
+  .panel p b{ color: var(--purple-bright); font-weight:600; }
+
+  .content-section{ display:none; }
+  .content-section.active{ display:block; animation: fade .35s ease; }
+  @keyframes fade{ from{opacity:0; transform: translateY(6px);} to{opacity:1; transform:none;} }
+
+  .footer{
+    margin-top: 50px; text-align:center;
+    font-family:'JetBrains Mono', monospace; font-size: 10px; letter-spacing:3px;
+    color: var(--dim); text-transform:uppercase;
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <span><span class="dot"></span>STATUS: <b>ON THE MOVE</b></span>
+    <span>AGE 24 · UBUNYE</span>
+    <span>HOUSE: <b>NKOSI</b></span>
+    <span>ACCESS: <b>KIN ONLY</b></span>
+  </div>
+
+  <div class="wrap">
+
+    <div class="hero">
+      <div>
+        <div class="kicker">Kept in my own hand, for myself</div>
+        <h1>Nkosi</h1>
+        <div class="subname">T'Kari · Age 24</div>
+        <div class="quote">"Respect isn't handed to you at the border. You carry it in with you, or you don't come in at all."</div>
+      </div>
+
+      <div class="emblem">
+        <div class="word top">Tribe Raised Me</div>
+        <svg viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="92" fill="none" stroke="#3b1e73" stroke-width="2"/>
+          <circle cx="100" cy="100" r="92" fill="none" stroke="#a78bfa" stroke-width="1" stroke-dasharray="2 6" opacity="0.5"/>
+          <g stroke="#a78bfa" stroke-width="1.4" opacity="0.55">
+            <path d="M100 20 L108 40 L92 40 Z"/>
+            <path d="M100 180 L108 160 L92 160 Z"/>
+            <path d="M20 100 L40 92 L40 108 Z"/>
+            <path d="M180 100 L160 92 L160 108 Z"/>
+          </g>
+          <g transform="translate(100,100) rotate(28)">
+            <line x1="0" y1="0" x2="0" y2="-58" stroke="#e0855f" stroke-width="2.4" stroke-linecap="round"/>
+          </g>
+          <polygon points="100,72 118,100 100,128 82,100" fill="#1a0f2e" stroke="#c9b8f5" stroke-width="1.5"/>
+          <circle cx="100" cy="100" r="4" fill="#a78bfa"/>
+        </svg>
+        <div class="word bottom">Road Shaped Me</div>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat">
+        <div class="k">Discipline</div>
+        <div class="track"><i data-w="82"></i></div>
+        <div class="n">82</div>
+      </div>
+      <div class="stat">
+        <div class="k">Wanderlust</div>
+        <div class="track"><i data-w="91"></i></div>
+        <div class="n">91</div>
+      </div>
+      <div class="stat">
+        <div class="k">Tribal Bond</div>
+        <div class="track"><i data-w="76"></i></div>
+        <div class="n">76</div>
+      </div>
+      <div class="stat">
+        <div class="k">Guardedness</div>
+        <div class="track"><i data-w="88"></i></div>
+        <div class="n">88</div>
+      </div>
+      <div class="stat">
+        <div class="k">Trust Given</div>
+        <div class="track"><i data-w="14"></i></div>
+        <div class="n">14</div>
+      </div>
+    </div>
+
+    <div class="tabs">
+      <div class="tab active" data-tab="origin">Origin</div>
+      <div class="tab" data-tab="tribe">The Tribe</div>
+      <div class="tab" data-tab="road">The Road</div>
+      <div class="tab" data-tab="character">Character</div>
+      <div class="tab" data-tab="status">Current Status</div>
+      <div class="tab" data-tab="next">What's Next</div>
+    </div>
+
+    <div class="panel">
+
+      <div class="content-section active" id="origin">
+        <div class="panel-top">
+          <span class="entry-tag">Entry 01 : Where I'm From</span>
+          <span class="kept-by">Kept by T. Nkosi</span>
+        </div>
+        <h2>Born Into Two Lines</h2>
+        <p>T'Kari was born into the tribe Zulu. In a community where strength was valued more was discipline and responsibility. He was one of the tribe's greatest warriors and his mother was keeper of their history and traditions.</p>
+        <p>It was expected that from a young age T'Kari would follow in his father's footsteps. But T'Kari never wanted to follow in his father's footsteps. He wanted to find out what went on in the world beyond his tribe.</p>
+        <p>Over the years, as he grew older, he started to venture into his village and beyond, to see cities and people who were not familiar with his ways of life. The thirteen trips transformed him. He knew that he had to protect his people, but sometimes that meant going outside their borders.</p>
+      </div>
+
+      <div class="content-section" id="tribe">
+        <div class="panel-top">
+          <span class="entry-tag">Entry 02 : Ubunye</span>
+          <span class="kept-by">Kept by T. Nkosi</span>
+        </div>
+        <h2>The Village That Raised Me</h2>
+        <p>The Zulu are a proud and powerful people known for their strong warriors, close family bonds, and deep respect for their ancestors. Our society values strength, courage, loyalty, and protecting their community. Generations of warriors have defended their homeland, passing their traditions and knowledge down to the next generation.</p>
+      </div>
+
+      <div class="content-section" id="road">
+        <div class="panel-top">
+          <span class="entry-tag">Entry 03 : Past The Border</span>
+          <span class="kept-by">Kept by T. Nkosi</span>
+        </div>
+        <h2>What The Cities Taught Me</h2>
+        <p>On my journey, I met a young boy named Yukio Gray. He was very friendly to me, my ways, and my traditions. He showed me around as I traveled, and eventually, I considered him my first friend, showing that life outside of my tribe is not all so evil and untrustworthy. As of now, he's the only person outside of my tribe to earn my trust.</p>
+      </div>
+
+      <div class="content-section" id="character">
+        <div class="panel-top">
+          <span class="entry-tag">Entry 04 : Who I Am Now</span>
+          <span class="kept-by">Kept by T. Nkosi</span>
+        </div>
+        <h2>Guarded, Not Cold</h2>
+        <p>I don't warm up to people very quickly, and I can be pretty cautious around people I don't know. However, I have the mindset of a king, so I'm willing to work alongside others and put my personal feelings aside if it means helping my people in the long run. I understand that I can't protect my people by myself, and sometimes I have to trust others and work with them to do what is best for my tribe.</p>
+      </div>
+
+      <div class="content-section" id="status">
+        <div class="panel-top">
+          <span class="entry-tag">Entry 05 : Right Now</span>
+          <span class="kept-by">Kept by T. Nkosi</span>
+        </div>
+        <h2>Still Out Here</h2>
+        <p>I'm not with my people right now. I'm out looking and learning the ways of others alongside Yukio, who is showing me around his culture.</p>
+      </div>
+
+      <div class="content-section" id="next">
+        <div class="panel-top">
+          <span class="entry-tag">Entry 06 : What's Coming</span>
+          <span class="kept-by">Kept by T. Nkosi</span>
+        </div>
+        <h2>Not Sure Yet, And That's Fine</h2>
+        <p>I don't have the rest of this figured out, and I've made peace with that. But what I do know is that whatever it turns into, it's going to be something Ubunye can be proud of, and something that's still mine.</p>
+      </div>
+
+    </div>
+
+    <div class="footer">Where the ancestors watch</div>
+  </div>
+
+<script>
+  const tabs = document.querySelectorAll('.tab');
+  const sections = document.querySelectorAll('.content-section');
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      sections.forEach(s => s.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.tab).classList.add('active');
+    });
+  });
+
+  const bars = document.querySelectorAll('.track i');
+  window.addEventListener('load', () => {
+    bars.forEach(b => { b.style.width = b.dataset.w + '%'; });
+  });
+</script>
+
+</body>
+</html>
